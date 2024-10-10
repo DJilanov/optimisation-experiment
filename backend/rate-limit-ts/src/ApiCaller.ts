@@ -1,6 +1,8 @@
 import { MockAPI } from "./MockAPI";
 import { Limits, Request } from "./types";
 
+const GROUP_LIMIT = 12;
+
 export class ApiCaller {
   private apiInstances: MockAPI[];
   private limits: Limits;
@@ -13,8 +15,8 @@ export class ApiCaller {
     // While there are requests in the queue and we haven't hit our limits, process them
     while (
       this.requestQueue.length > 0 &&
-      this.activeRequests < this.limits.rpm / 12 &&
-      this.tokensUsed + this.requestQueue[0].tokenCount <= this.limits.tpm / 12
+      this.activeRequests < this.limits.rpm / GROUP_LIMIT &&
+      this.tokensUsed + this.requestQueue[0].tokenCount <= this.limits.tpm / GROUP_LIMIT
     ) {
       const request = this.requestQueue.shift()!;
       this.sendRequest(request);
