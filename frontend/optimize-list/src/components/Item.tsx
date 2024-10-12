@@ -1,22 +1,22 @@
-import { ItemData } from "../api/fetch-list";
+import React from "react";
+import { ItemProps } from "../types/common";
 
-
-type ItemProps = {
-    item: ItemData;
-    isSelected: boolean;
-    onClick: () => void;
-    };
-
-function Item({ item, isSelected, onClick }: ItemProps) {
-
+const Item = React.memo(({ item, onClick }: ItemProps) => {
   return (
-    <li
-      style={{ backgroundColor: isSelected ? 'yellow' : 'white', cursor: 'pointer'}}
+    <span
+      style={styles.span}
       onClick={onClick}
     >
-        ID {item.id} - {item.name}
-    </li>
+      ID {item.id} - {item.name}
+    </span>
   );
+});
+
+const styles = {
+  span: {
+    cursor: 'pointer',
+    color: 'black'
+  },
 }
 
 export default Item;

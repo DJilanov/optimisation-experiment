@@ -30,7 +30,7 @@ describe("ApiCaller", () => {
       tokenCounts.map((tokenCount) => apiCaller.call(tokenCount)),
     );
 
-    const succesfulCalls = calls.filter((call) => call?.success).length;
+    const succesfulCalls = calls.filter((call: any) => call?.success).length;
     const endTime = Date.now();
     const duration = (endTime - startTime) / 1000;
     console.log(
